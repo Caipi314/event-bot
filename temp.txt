@@ -1,0 +1,79 @@
+{
+  "token": "NBRUHzcyNjM0BRUHMzYzMjc5NzA0MDBRUHY0.X59h0w.xZG0T2MvBRUHxKbCkSPSLBRUHC6WCgrmzTw",
+  "dictionaryapi": "e2BRUH85c57f-e1BRUH65-4BRUH356-9490-3aBRUH680616BRUHd567",
+  "guilds": [
+    "761771802568687616"
+  ],
+  "help": {
+    "event clear [<title>]": "clears one or all events",
+    "event debug": "sends geek shit",
+    "event timetoggle": "switch between 12&24 hr",
+    "event time": "shows if its currently on 24 or 12hr time",
+    "event future": "shows all the future events",
+    "event help": "wtf did you think you just did",
+    "event <hh:mm> [<@people>] <title>": "creates a new event"
+  },
+  "responses": [
+    "bro's over hoe's you fucking twat",
+    "what could be more important than your boys",
+    "men who perfer the bitches get the stiches",
+    "bra girl call? Seriously?",
+    "Glube will sing in your ear at night if you don't come",
+    "AUUUUGUUUUUUU",
+    "Youre clearly not spicey",
+    "You're becoming a vegetable by not joining"
+  ],
+  "reminder": {
+    "true": "You have a discord meeting now titled ",
+    "null": "You have not responded to a discord meeting taking place now titled "
+  },
+  "statuses": {
+    "true": "is coming",
+    "false": "is not coming",
+    "null": "is too busy to respond"
+  },
+  "dateOps": [
+    "en-US",
+    {
+      "timeStyle": "short",
+      "timeZone": "America/New_York",
+      "hour12": true
+    }
+  ],
+  "time24": false,
+  "register": {
+    "570396319982682122": {
+      "username": "DanielG7",
+      "bot": false,
+      "discriminator": "2744",
+      "emoji": {
+        "name": "glube",
+        "id": "804172597675556865"
+      }
+    },
+    "758748636108029952": {
+      "username": "jakinator",
+      "bot": false,
+      "discriminator": "5272",
+      "emoji": {
+        "name": "jakob",
+        "id": "804172612980310056"
+      }
+    },
+    "282859044593598464": {
+      "username": "ProBot ✨",
+      "bot": true,
+      "discriminator": "5803"
+    },
+    "308735619616735234": {
+      "id": "308735619616735234",
+      "username": "CharlieAlphaIndia PapaIndia 314",
+      "discriminator": "0587",
+      "bot": false,
+      "emoji": {
+        "name": "cai",
+        "id": "804172579525885962"
+      }
+    }
+  }
+}

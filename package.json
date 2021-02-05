@@ -1,0 +1,24 @@
+{
+	"name": "discord",
+	"version": "1.0.0",
+	"description": "",
+	"main": "bot.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node bot.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"nodemonConfig": {
+		"ignore": [
+			"*.json"
+		]
+	},
+	"dependencies": {
+		"axios": "^0.21.1",
+		"discord.js": "^12.4.1",
+		"discord.js-commando": "^0.10.0",
+		"puppeteer": "^7.0.1",
+		"redis": "^3.0.2"
+	}
+}

@@ -21,6 +21,11 @@ function sendDelete(text, msg, time = 3000) {
 		.then(message => setTimeout(() => message.delete(), time));
 	msg.delete();
 }
+function deleteMessage(channel, id) {
+	channel.messages
+		.fetch(id)
+		.then(message => message.delete());
+}
 
 client.on('message', msg => {
 	if (msg.author == client.user) { return }
@@ -73,19 +78,22 @@ function checkForOthers({ msg, config, events }) {
 			return cnf;
 		}, 'config');
 	}
-	if (Object.keys(config.presets).indexOf(msg.content.toLowerCase()) !== -1) {
+	const isPoll = () => {
+		['👍', '👎'].forEach(emoji => msg.react(emoji));
+	}
+
+	if (Object.keys(config.presets).includes(msg.content.toLowerCase())) {
 		isKeyword();
 	} else if (config.noYouSpellings.some(word => msg.content.includes(word))) {
 		isNoU();
-	} else { return }
+	} else if (msg.content.toLowerCase().endsWith(' right?')) {
+		isPoll();
+	}
+	else { return }
 }
 
 
-function deleteMessage(channel, id) {
-	channel.messages
-		.fetch(id)
-		.then(message => message.delete());
-}
+
 
 function isRSVP(reaction, user, added) {
 	const updateAttendies = (event, reaction) => {
@@ -375,9 +383,7 @@ function createEvent({ msg, config, events }) {
 		const data = `**${event.title}** created for **${displayDate}**\n${displayNames} are invited\nRespond to this message to mark your availability`;
 		msg.channel.send(data)
 			.then(message => {
-				message.react('👍');
-				message.react('👎');
-				message.react('❌');
+				['👍', '👎', '❌'].forEach(emoji => message.react(emoji));
 				updateStat(evts => {
 					evts[event.title].messages.readback = message.id; return evts;
 				}, 'events');

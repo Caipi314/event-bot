@@ -1,162 +1,162 @@
 {
-	"token": "NBRUHzcyNjM0BRUHMzYzMjc5NzA0MDBRUHY0.X59h0w.xZG0T2MvBRUHxKbCkSPSLBRUHC6WCgrmzTw",
-	"dictionaryapi": "e2BRUH85c57f-e1BRUH65-4BRUH356-9490-3aBRUH680616BRUHd567",
-	"guilds": [
-		"761771802568687616"
-	],
-	"help": {
-		"eventBot": {
-			"event clear <[title]>": "clears one or all events",
-			"event timetoggle": "switch between 12&24 hr",
-			"event time": "shows if its currently on 24 or 12hr time",
-			"event future": "shows all the future events",
-			"event prests": "sends all the event presets",
-			"event [hh:mm] <[@people>]> [title]": "creates a new event"
-		},
-		"sleepBot": {
-			"slept xx% [Jan 1 2000], [1 (days ago)]": "logs your sleep percentage",
-			"sleep history <[days ago]>": "shows everyones sleep history",
-			"sleep stats": "show everyone's sleep stats"
-		},
-		"misc": {
-			"debug [file]": "sends geek shit",
-			"define [word]": "define a word"
-		}
-	},
-	"presets": {
-		"break": "10:30",
-		"lunch": "1:15",
-		"afterschool": "4:32",
-		"postdinner": "8:00",
-		"bed": "11:00"
-	},
-	"noYouSpellings": [
-		"no u",
-		"nou",
-		"no you",
-		"no you"
-	],
-	"responses": [
-		"bro's over hoe's you fucking twat",
-		"what could be more important than your boys",
-		"men who perfer the bitches get the stiches",
-		"bra girl call? Seriously?",
-		"Glube will sing in your ear at night if you don't come",
-		"AUUUUGUUUUUUU",
-		"Youre clearly not spicey",
-		"You're becoming a vegetable by not joining"
-	],
-	"sleepResponses": {
-		"feedback": {
-			"Why not just pull an all nighter": "did you?",
-			"Feeling tired eh?": "think you can survive Ms Harlap?",
-			"Should have gone to bed later": "did you make the right choice?",
-			"#BringBackSchoolNapTime": "have you signed the petition",
-			"Loose a couple of pounds and you're blanket will feel heavier": "do you need a heavier blanket?",
-			"Wow! You didn't get laid tonight": "whats your marital status?",
-			"Go brag to all your friends... oh wait": "how many can you brag to?",
-			"Don't you know that the worse sleep, the cooler you are?": "how cool are you?",
-			"Congratulations! Its only downhill from here": "can you even climb a hill?"
-		}
-	},
-	"reminder": {
-		"true": "You have a discord meeting now titled ",
-		"null": "You have not responded to a discord meeting taking place now titled "
-	},
-	"statuses": {
-		"true": "is coming",
-		"false": "is not coming",
-		"null": "is too busy to respond"
-	},
-	"dateOps": [
-		"en-US",
-		{
-			"timeStyle": "short",
-			"timeZone": "America/New_York",
-			"hour12": true
-		}
-	],
-	"register": {
-		"772634363279704064": {
-			"id": "772634363279704064",
-			"username": "ScheduleBot",
-			"discriminator": "3148",
-			"bot": true
-		},
-		"570396319982682122": {
-			"id": "570396319982682122",
-			"username": "DanielG7",
-			"discriminator": "2744",
-			"bot": false,
-			"emoji": {
-				"happy": {
-					"name": "glube",
-					"id": "804172597675556865"
-				},
-				"sad": {
-					"name": "glubesad",
-					"id": "805209944131502150"
-				}
-			},
-			"stats": {
-				"debugs": 0,
-				"definitions": 0,
-				"noUs": 0,
-				"eventsCreated": 1,
-				"eventsAttended": 6
-			}
-		},
-		"308735619616735234": {
-			"id": "308735619616735234",
-			"username": "CharlieAlphaIndia PapaIndia 314",
-			"discriminator": "0587",
-			"bot": false,
-			"emoji": {
-				"happy": {
-					"name": "cai",
-					"id": "804172579525885962"
-				},
-				"sad": {
-					"name": "caisad",
-					"id": "805209943954554890"
-				}
-			},
-			"stats": {
-				"debugs": 1,
-				"definitions": 0,
-				"noUs": 1,
-				"eventsCreated": 57,
-				"eventsAttended": 40
-			}
-		},
-		"758748636108029952": {
-			"id": "758748636108029952",
-			"username": "jakinator",
-			"discriminator": "5272",
-			"bot": false,
-			"emoji": {
-				"happy": {
-					"name": "jakob",
-					"id": "804172612980310056"
-				},
-				"sad": {
-					"name": "jakobsad",
-					"id": "805209944185634826"
-				}
-			},
-			"stats": {
-				"debugs": 0,
-				"definitions": 2,
-				"noUs": 0,
-				"eventsCreated": 8,
-				"eventsAttended": 23
-			}
-		},
-		"235088799074484224": {
-			"id": "235088799074484224",
-			"username": "Rythm",
-			"discriminator": "3722",
-			"bot": true
-		}
-	}
+  "token": "NBRUHzcyNjM0BRUHMzYzMjc5NzA0MDBRUHY0.X59h0w.xZG0T2MvBRUHxKbCkSPSLBRUHC6WCgrmzTw",
+  "dictionaryapi": "e2BRUH85c57f-e1BRUH65-4BRUH356-9490-3aBRUH680616BRUHd567",
+  "guilds": [
+    "761771802568687616"
+  ],
+  "help": {
+    "eventBot": {
+      "event clear <[title]>": "clears one or all events",
+      "event timetoggle": "switch between 12&24 hr",
+      "event time": "shows if its currently on 24 or 12hr time",
+      "event future": "shows all the future events",
+      "event prests": "sends all the event presets",
+      "event [hh:mm] <[@people>]> [title]": "creates a new event"
+    },
+    "sleepBot": {
+      "slept xx% [Jan 1 2000], [1 (days ago)]": "logs your sleep percentage",
+      "sleep history <[days ago]>": "shows everyones sleep history",
+      "sleep stats": "show everyone's sleep stats"
+    },
+    "misc": {
+      "debug [file]": "sends geek shit",
+      "define [word]": "define a word"
+    }
+  },
+  "presets": {
+    "break": "10:30",
+    "lunch": "1:15",
+    "afterschool": "4:32",
+    "postdinner": "8:00",
+    "bed": "11:00"
+  },
+  "noYouSpellings": [
+    "no u",
+    "nou",
+    "no you",
+    "no you"
+  ],
+  "responses": [
+    "bro's over hoe's you fucking twat",
+    "what could be more important than your boys",
+    "men who perfer the bitches get the stiches",
+    "bra girl call? Seriously?",
+    "Glube will sing in your ear at night if you don't come",
+    "AUUUUGUUUUUUU",
+    "Youre clearly not spicey",
+    "You're becoming a vegetable by not joining"
+  ],
+  "sleepResponses": {
+    "feedback": {
+      "Why not just pull an all nighter": "did you?",
+      "Feeling tired eh?": "think you can survive Ms Harlap?",
+      "Should have gone to bed later": "did you make the right choice?",
+      "#BringBackSchoolNapTime": "have you signed the petition",
+      "Loose a couple of pounds and you're blanket will feel heavier": "do you need a heavier blanket?",
+      "Wow! You didn't get laid tonight": "whats your marital status?",
+      "Go brag to all your friends... oh wait": "how many can you brag to?",
+      "Don't you know that the worse sleep, the cooler you are?": "how cool are you?",
+      "Congratulations! Its only downhill from here": "can you even climb a hill?"
+    }
+  },
+  "reminder": {
+    "true": "You have a discord meeting now titled ",
+    "null": "You have not responded to a discord meeting taking place now titled "
+  },
+  "statuses": {
+    "true": "is coming",
+    "false": "is not coming",
+    "null": "is too busy to respond"
+  },
+  "dateOps": [
+    "en-US",
+    {
+      "timeStyle": "short",
+      "timeZone": "America/New_York",
+      "hour12": true
+    }
+  ],
+  "register": {
+    "772634363279704064": {
+      "id": "772634363279704064",
+      "username": "ScheduleBot",
+      "discriminator": "3148",
+      "bot": true
+    },
+    "570396319982682122": {
+      "id": "570396319982682122",
+      "username": "DanielG7",
+      "discriminator": "2744",
+      "bot": false,
+      "emoji": {
+        "happy": {
+          "name": "glube",
+          "id": "804172597675556865"
+        },
+        "sad": {
+          "name": "glubesad",
+          "id": "805209944131502150"
+        }
+      },
+      "stats": {
+        "debugs": 0,
+        "definitions": 0,
+        "noUs": 2,
+        "eventsCreated": 1,
+        "eventsAttended": 6
+      }
+    },
+    "308735619616735234": {
+      "id": "308735619616735234",
+      "username": "CharlieAlphaIndia PapaIndia 314",
+      "discriminator": "0587",
+      "bot": false,
+      "emoji": {
+        "happy": {
+          "name": "cai",
+          "id": "804172579525885962"
+        },
+        "sad": {
+          "name": "caisad",
+          "id": "805209943954554890"
+        }
+      },
+      "stats": {
+        "debugs": 1,
+        "definitions": 0,
+        "noUs": 4,
+        "eventsCreated": 57,
+        "eventsAttended": 40
+      }
+    },
+    "758748636108029952": {
+      "id": "758748636108029952",
+      "username": "jakinator",
+      "discriminator": "5272",
+      "bot": false,
+      "emoji": {
+        "happy": {
+          "name": "jakob",
+          "id": "804172612980310056"
+        },
+        "sad": {
+          "name": "jakobsad",
+          "id": "805209944185634826"
+        }
+      },
+      "stats": {
+        "debugs": 0,
+        "definitions": 2,
+        "noUs": 0,
+        "eventsCreated": 8,
+        "eventsAttended": 23
+      }
+    },
+    "235088799074484224": {
+      "id": "235088799074484224",
+      "username": "Rythm",
+      "discriminator": "3722",
+      "bot": true
+    }
+  }
 }

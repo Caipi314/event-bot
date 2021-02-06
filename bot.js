@@ -82,6 +82,10 @@ function checkForOthers({ msg, config, events }) {
 	const isPoll = () => {
 		['👍', '👎'].forEach(emoji => msg.react(emoji));
 	}
+	const isRate = () => {
+		['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟']
+			.forEach(emoji => msg.react(emoji));
+	}
 
 	if (Object.keys(config.presets).includes(msg.content.toLowerCase())) {
 		isKeyword();
@@ -89,6 +93,8 @@ function checkForOthers({ msg, config, events }) {
 		isNoU();
 	} else if (msg.content.toLowerCase().endsWith(' right?')) {
 		isPoll();
+	} else if (msg.channel.id == Object.values(config.guilds)[0].rateChannel) {
+		isRate();
 	}
 	else { return }
 }
@@ -112,21 +118,23 @@ function isRSVP(reaction, user, added, { config, events }) {
 					config.register[id].emoji.sad;
 				return `<:${emojiObj.name}:${emojiObj.id}>`;
 			})
-			.join('     ');
-		attendies == '' ? attendies = '*No attendies yet...*' : 0;
+			.join('  ');
+
+		attendies == '' ? attendies = '🚷' : 0;
+		const text = `${event.emoji}        ${attendies}        ${event.emoji}`;
 
 		reaction.message.channel.messages.fetch(event.messages.guestList)
-			.then(message => message.edit(attendies));
+			.then(message => message.edit(text));
 	}
 	const sendSass = (user) => {
-		const message = config.responses[Math.floor(Math.random() * config.responses.length)];
-		user.send(message);
+		user.send(config.responses[Math.floor(Math.random() * config.responses.length)]);
 	}
 
-	//if message is not sent by the bot / title is invalid / person isnt invited
+	//if message is not sent by the bot / person isnt invited
 	if (reaction.message.author.id != client.user.id) { return }
-	const event = Object.values(events).filter(event => event.messages.readback == reaction.message.id)[0];
-	if (event === undefined) { return }
+	const event = Object.values(events)
+		.filter(event => event.messages.readback == reaction.message.id)[0];
+	if (event === undefined) { return } // didn't react to a readback
 
 	if (!(Object.keys(event.people).includes(user.id))) { throw 'You are not part of the event 😢' }
 
@@ -197,34 +205,36 @@ client.on('messageReactionRemove', (r, u) => messageReaction(r, u, false));
 
 function updateRegister() {
 	const config = get('config');
-	client.guilds.cache.get(config.guilds[0]).members.cache
-		.forEach(({ user: { id, username, discriminator, bot } }) => {
-			if (Object.keys(config.register).includes(id)) {
-				config.register[id].username = username;
-				config.register[id].bot = bot;
-				config.register[id].discriminator = discriminator;
-			} else {
-				config.register[id] = { id, username, discriminator, bot };
-				if (!bot) {
-					config.register[id].stats = {
-						debugs: 0,
-						definitions: 0,
-						noUs: 0,
-						eventsCreated: 0,
-						eventsAttended: 0,
-					};
+	Object.keys(config.guilds).forEach(guildID => {
+		client.guilds.cache.get(guildID).members.cache
+			.forEach(({ user: { id, username, discriminator, bot } }) => {
+				if (Object.keys(config.register).includes(id)) {
+					config.register[id].username = username;
+					config.register[id].bot = bot;
+					config.register[id].discriminator = discriminator;
 				}
-
-			}
-			set({ config });
-		})
+				else {
+					config.register[id] = { id, username, discriminator, bot };
+					if (!bot) {
+						config.register[id].stats = {
+							debugs: 0,
+							definitions: 0,
+							noUs: 0,
+							eventsCreated: 0,
+							eventsAttended: 0,
+						};
+					}
+				}
+				set({ config });
+			})
+	})
 }
-function sendTp2(event) {
+function sendTp2(event) { // poor implementation
 	const config = get('config');
 	Object.keys(event.people)
 		.filter(id => event.people[id] === true)
 		.forEach(id => {
-			const user = client.guilds.cache.get(config.guilds[0]).members.cache.get(id);
+			const user = client.guilds.cache.get(Object.keys(config.guilds)[0]).members.cache.get(id); //BAD LINE
 			if (user !== undefined && user.voice.channel) {
 				//user isn't cached OR user isn't connected
 				user.send(`You're late to your meeting called **${event.title}**`);
@@ -319,6 +329,17 @@ function sendPresets({ msg, config }) {
 	msg.channel.send(`__Presets include:__\n${presets}`);
 }
 function createEvent({ msg, config, events }) {
+	const getTitle = () => {
+		let title = msg.content
+			.split(' ')
+			// + 1 for 'event' and optional + 1 for time
+			.slice(msg.mentions.users.size + msg.content.includes(':') + 1)
+			.join(' ')
+			.replace('**', '');
+		title.length == 0 ? title = 'Untitled Event' : 0;
+		while (Object.keys(events).includes(title)) { title += '!'; }
+		return title;
+	}
 	const getDate = () => {
 		const offset = (process.env._ && process.env._.indexOf("heroku") ? 5 : 0) + (config.dateOps[1].hour12 ? 12 : 0);
 		const today = new Date();
@@ -362,26 +383,24 @@ function createEvent({ msg, config, events }) {
 	const getPeople = () => {
 		let mentions = msg.mentions.users.map(user => user.id);
 		if (mentions.length == 0) {
-			mentions = Object.keys(config.register)
-				.filter(id => !config.register[id].bot)
+			mentions = Object.keys(config.register).filter(id => !config.register[id].bot);
 		}
-		//add the author if not their
-		mentions.indexOf(msg.author.id) == -1 ? mentions.push(msg.author.id) : 0;
+		!mentions.includes(msg.author.id) ? mentions.push(msg.author.id) : 0;
+
+		mentions = mentions.sort((a, b) => {
+			return config.register[a].username.toUpperCase() <
+				config.register[b].username.toUpperCase() ?
+				-1 : 1;
+		});
 		// each user is defaulted to null status
-		return mentions.reduce((acc, usr) => {
-			acc[usr] = null; return acc
-		}, {});
+		return mentions.reduce((acc, usr) => { acc[usr] = null; return acc; }, {});
 	}
-	const getTitle = () => {
-		let title = msg.content
-			.split(' ')
-			// + 1 for 'event' and optional + 1 for time
-			.slice(msg.mentions.users.size + msg.content.includes(':') + 1)
-			.join(' ')
-			.replace('**', '');
-		title.length == 0 ? title = 'Untitled Event' : 0;
-		while (Object.keys(events).includes(title)) { title += '!'; }
-		return title;
+	const getEmoji = (date) => {
+		let time = date.getHours();
+		if (time > 12) { time -= 12 }
+		if (date.getMinutes() > 15 && date.getMinutes() < 45) { time += '30'; }
+		if (date.getMinutes() > 45) { time += 1; }
+		return `:clock${time}:`
 	}
 	const sendConfimation = (event) => {
 		const displayDate = event.date.toLocaleTimeString(...config.dateOps);
@@ -398,7 +417,7 @@ function createEvent({ msg, config, events }) {
 				}, 'events');
 			});
 
-		msg.channel.send('*No attendies yet...*')
+		msg.channel.send(`${event.emoji}        🚷        ${event.emoji}`)
 			.then(message => {
 				updateStat(evts => {
 					evts[event.title].messages.guestList = message.id; return evts;
@@ -406,9 +425,11 @@ function createEvent({ msg, config, events }) {
 			});
 
 	}
+
 	const event = {};
 	event.title = getTitle();
 	event.date = getDate();
+	event.emoji = getEmoji(event.date);
 	event.creator = msg.author.id;
 	event.people = getPeople();
 	event.messages = {
@@ -427,8 +448,7 @@ function createEvent({ msg, config, events }) {
 	updateStat(cnf => {
 		cnf.register[msg.author.id].stats.eventsCreated += 1;
 		return cnf;
-	}, 'config')
-
+	}, 'config');
 }
 
 function clear({ msg, events }) {

@@ -1,9 +1,11 @@
 {
   "token": "NBRUHzcyNjM0BRUHMzYzMjc5NzA0MDBRUHY0.X59h0w.xZG0T2MvBRUHxKbCkSPSLBRUHC6WCgrmzTw",
   "dictionaryapi": "e2BRUH85c57f-e1BRUH65-4BRUH356-9490-3aBRUH680616BRUHd567",
-  "guilds": [
-    "761771802568687616"
-  ],
+  "guilds": {
+    "761771802568687616": {
+      "rateChannel": "804492018868813856"
+    }
+  },
   "help": {
     "eventBot": {
       "event clear <[title]>": "clears one or all events",
@@ -11,7 +13,7 @@
       "event time": "shows if its currently on 24 or 12hr time",
       "event future": "shows all the future events",
       "event prests": "sends all the event presets",
-      "event [hh:mm] <[@people>]> [title]": "creates a new event"
+      "event <[<MM-dd>-hh:mm]> <[@people>]> [title]": "creates a new event"
     },
     "sleepBot": {
       "slept xx% [Jan 1 2000], [1 (days ago)]": "logs your sleep percentage",
@@ -125,8 +127,8 @@
         "debugs": 1,
         "definitions": 0,
         "noUs": 5,
-        "eventsCreated": 67,
-        "eventsAttended": 41
+        "eventsCreated": 91,
+        "eventsAttended": 49
       }
     },
     "758748636108029952": {
@@ -149,7 +151,7 @@
         "definitions": 2,
         "noUs": 0,
         "eventsCreated": 8,
-        "eventsAttended": 23
+        "eventsAttended": 24
       }
     },
     "235088799074484224": {

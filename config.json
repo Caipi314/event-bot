@@ -124,9 +124,9 @@
       "stats": {
         "debugs": 1,
         "definitions": 0,
-        "noUs": 4,
-        "eventsCreated": 57,
-        "eventsAttended": 40
+        "noUs": 5,
+        "eventsCreated": 67,
+        "eventsAttended": 41
       }
     },
     "758748636108029952": {
@@ -156,6 +156,12 @@
       "id": "235088799074484224",
       "username": "Rythm",
       "discriminator": "3722",
+      "bot": true
+    },
+    "769014043444641842": {
+      "id": "769014043444641842",
+      "username": "No U",
+      "discriminator": "5477",
       "bot": true
     }
   }

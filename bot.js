@@ -36,6 +36,7 @@ client.on('message', msg => {
 	else if (msg.content.startsWith('event time')) { fn = time }
 	else if (msg.content.startsWith('event future')) { fn = future }
 	else if (msg.content.startsWith('event presets')) { fn = sendPresets }
+	//event kewords have to be last
 	else if (msg.content.startsWith('event ')) { fn = createEvent }
 	else if (msg.content.startsWith('meeting ')) { fn = createEvent }
 	else if (msg.content.startsWith('call ')) { fn = createEvent }
@@ -95,15 +96,14 @@ function checkForOthers({ msg, config, events }) {
 
 
 
-function isRSVP(reaction, user, added) {
-	const updateAttendies = (event, reaction) => {
+function isRSVP(reaction, user, added, { config, events }) {
+	const updateAttendies = (event) => {
 		reaction.message.reactions.removeAll();
 		reaction.message.react('👍');
 		reaction.message.react('👎');
 		reaction.message.react('❌');
 
 
-		const config = get('config');
 		let attendies = Object.keys(event.people)
 			.filter(id => event.people[id] !== null)
 			.map(id => {
@@ -119,44 +119,43 @@ function isRSVP(reaction, user, added) {
 			.then(message => message.edit(attendies));
 	}
 	const sendSass = (user) => {
-		const config = get('config');
 		const message = config.responses[Math.floor(Math.random() * config.responses.length)];
 		user.send(message);
 	}
-	const events = get('events');
 
 	//if message is not sent by the bot / title is invalid / person isnt invited
 	if (reaction.message.author.id != client.user.id) { return }
-	const title = reaction.message.content.split('**')[1];
-	if (events[title] === undefined) { throw 'Hmm... something went wrong' }
-	if (!(Object.keys(events[title].people).includes(user.id))) { throw 'You are not part of the event 😢' }
+	const event = Object.values(events).filter(event => event.messages.readback == reaction.message.id)[0];
+	if (event === undefined) { return }
 
-	if (reaction.emoji.name == '👍') {
-		events[title].people[user.id] = added ? true : null;
-		updateAttendies(events[title], reaction);
-	} else if (reaction.emoji.name == '👎') {
-		events[title].people[user.id] = added ? false : null;
-		sendSass(user);
-		updateAttendies(events[title], reaction);
-	} else if (reaction.emoji.name == '❌') {
-		if (events[title].creator != user.id) { throw (added ? `${user}, You cannot delete someone else's event!` : `${user} the damage was already done bud`) }
+	if (!(Object.keys(event.people).includes(user.id))) { throw 'You are not part of the event 😢' }
 
-		Object.values(events[title].messages).forEach(msgId =>
+	if (['👍', '👎'].includes(reaction.emoji.name)) {
+		if (reaction.emoji.name == '👍') {
+			event.people[user.id] = added ? true : null;
+		} else { //must be 👎
+			event.people[user.id] = added ? false : null;
+			sendSass(user);
+		}
+		updateAttendies(event);
+		updateStat(cnf => {
+			cnf.register[user.id].stats.eventsAttended += 1;
+			return cnf;
+		}, 'config');
+
+		events[event.title] = event;
+	} else { //must be ❌
+		if (event.creator != user.id) { throw (added ? `${user}, You cannot delete someone else's event!` : `${user} the damage was already done bud`) }
+
+		Object.values(event.messages).forEach(msgId =>
 			deleteMessage(reaction.message.channel, msgId));
-		delete events[title];
-	} else { return }
-
+		delete events[event.title];
+	}
 
 	set({ events });
-	updateStat(cnf => {
-		cnf.register[user.id].stats.eventsAttended += 1;
-		return cnf;
-	}, 'config');
 }
-function isDeleteDay(reaction, user, added) {
+function isDeleteDay(reaction, user, added, { config, log }) {
 	if (!added) { return }
-	const log = get('log');
-	const config = get('config');
 
 	const date = reaction.message.content.split('__')[1];
 	delete log[date][user.id];
@@ -172,7 +171,7 @@ function isDeleteDay(reaction, user, added) {
 
 	set({ log });
 
-	sendDelete(`${usr}, Your entry for **${date}** day has been removed`, reaction.message);
+	sendDelete(`${user}, Your entry for **${date}** day has been removed`, reaction.message);
 }
 
 function messageReaction(reaction, user, added) {
@@ -183,8 +182,11 @@ function messageReaction(reaction, user, added) {
 	else if ('🗑' == reaction.emoji.name) { fn = isDeleteDay }
 	else { return }
 
+	let config = get('config');
+	let events = get('events');
+	let log = get('log');
 	try {
-		fn(reaction, user, added);
+		fn(reaction, user, added, { config, events, log });
 	} catch (err) {
 		reaction.message.channel.send(`❗${err}❗`);
 		console.log(err);
@@ -328,7 +330,12 @@ function createEvent({ msg, config, events }) {
 				.split(' ')
 				.filter(word => Object.keys(config.presets).includes(word))[0];
 			input = config.presets[input];
-			if (input === undefined) { throw 'Please provide a valid time or preset' }
+			if (input === undefined) {
+				// sendDelete()
+				today.setHours(today.getHours() + 1);
+				today.setMinutes(0, 0, 0);
+				return today;
+			}
 		}
 
 
@@ -368,7 +375,8 @@ function createEvent({ msg, config, events }) {
 	const getTitle = () => {
 		let title = msg.content
 			.split(' ')
-			.slice(msg.mentions.users.size + 2) //+2 for 'time' and 'event'
+			// + 1 for 'event' and optional + 1 for time
+			.slice(msg.mentions.users.size + msg.content.includes(':') + 1)
 			.join(' ')
 			.replace('**', '');
 		title.length == 0 ? title = 'Untitled Event' : 0;
@@ -377,10 +385,11 @@ function createEvent({ msg, config, events }) {
 	}
 	const sendConfimation = (event) => {
 		const displayDate = event.date.toLocaleTimeString(...config.dateOps);
+		const isOrAre = Object.keys(event.people).length == 1 ? 'is' : 'are';
 		const displayNames = Object.keys(event.people)
 			.map(x => `<@${x}>`)
 			.join(', ');
-		const data = `**${event.title}** created for **${displayDate}**\n${displayNames} are invited\nRespond to this message to mark your availability`;
+		const data = `**${event.title}** created for **${displayDate}**\n${displayNames} ${isOrAre} invited\nRespond to this message to mark your availability`;
 		msg.channel.send(data)
 			.then(message => {
 				['👍', '👎', '❌'].forEach(emoji => message.react(emoji));
@@ -450,16 +459,17 @@ function future({ msg, config, events }) {
 	//if noone has responde INVITATIONS ARE SENT
 	//If everyone has responded ITS GONNA BE A PARTY
 	const calender = Object.values(events)
+		.sort((aEvent, bEvent) => Date.parse(bEvent.date) - Date.parse(aEvent.date))
+		.reverse()
 		.map(event => {
 			const date = new Date(event.date);
 			const dateString = date.toLocaleTimeString(...config.dateOps);
 			const people = Object.entries(event.people)
-				.map(([id, status]) => `\t\t\t**${config.register[id].username}** ${config.statuses[JSON.stringify(status)]}`)
+				.map(([id, status]) => `\t\t\t**${config.register[id].username.split(' ')[0]}** ${config.statuses[JSON.stringify(status)]}`)
 				.join('\n');
 			return `👉  **${event.title}** is happening at **${dateString}**, attendance:\n${people}`;
-		}).join('\n');
-	msg.channel.send(`__Upcoming events:__\n${calender}`)
-
+		}).join('\n\n');
+	msg.channel.send(`__Upcoming events:__\n${calender}`);
 }
 ////////////////////////////////////////////////////////////////////////////////
 

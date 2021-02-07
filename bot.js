@@ -21,10 +21,23 @@ function sendDelete(text, msg, time = 3000) {
 		.then(message => setTimeout(() => message.delete(), time));
 	msg.delete();
 }
-function deleteMessage(channel, id) {
-	channel.messages
-		.fetch(id)
-		.then(message => message.delete());
+function deleteEvent(event) {
+	const events = get('events');
+	//delete the mesages
+	Object.values(event.messages).forEach(msgId => {
+		client.guilds.cache.get(event.guildID)
+			.channels.cache.get(event.channelID).messages.fetch(msgId)
+			.then(message => message.delete()
+				.catch(err => console.log('Error: in deleting messages')))
+			.catch(err => console.log('Error: Message not found'))
+	});
+
+	delete events[event.title];
+	set({ events });
+}
+function reactOk(message) {
+	const config = get('config');
+	message.react(config.doneEmoji);
 }
 
 client.on('message', msg => {
@@ -111,9 +124,9 @@ function isRSVP(reaction, user, added, { config, events }) {
 
 
 		let attendies = Object.keys(event.people)
-			.filter(id => event.people[id] !== null)
+			.filter(id => event.people[id].status !== null)
 			.map(id => {
-				const emojiObj = event.people[id] ?
+				const emojiObj = event.people[id].status ?
 					config.register[id].emoji.happy :
 					config.register[id].emoji.sad;
 				return `<:${emojiObj.name}:${emojiObj.id}>`;
@@ -133,18 +146,19 @@ function isRSVP(reaction, user, added, { config, events }) {
 	//if message is not sent by the bot / person isnt invited
 	if (reaction.message.author.id != client.user.id) { return }
 	const event = Object.values(events)
-		.filter(event => event.messages.readback == reaction.message.id)[0];
+		.filter(event => event.messages.readback == reaction.message.id)
+		.pop();
 	if (event === undefined) { return } // didn't react to a readback
 
 	if (!(Object.keys(event.people).includes(user.id))) { throw 'You are not part of the event 😢' }
 
 	if (['👍', '👎'].includes(reaction.emoji.name)) {
-		if (reaction.emoji.name == '👍') {
-			event.people[user.id] = added ? true : null;
-		} else { //must be 👎
-			event.people[user.id] = added ? false : null;
-			sendSass(user);
-		}
+		const emojiMeaning = config.emojiIdx[reaction.emoji.name];
+
+		event.people[user.id].status =
+			emojiMeaning == event.people[user.id].status ? null : emojiMeaning;
+		event.people[user.id].status === false && added ? sendSass(user) : 0;
+
 		updateAttendies(event);
 		updateStat(cnf => {
 			cnf.register[user.id].stats.eventsAttended += 1;
@@ -152,15 +166,13 @@ function isRSVP(reaction, user, added, { config, events }) {
 		}, 'config');
 
 		events[event.title] = event;
+		set({ events });
 	} else { //must be ❌
 		if (event.creator != user.id) { throw (added ? `${user}, You cannot delete someone else's event!` : `${user} the damage was already done bud`) }
 
-		Object.values(event.messages).forEach(msgId =>
-			deleteMessage(reaction.message.channel, msgId));
-		delete events[event.title];
+		deleteEvent(event);
 	}
 
-	set({ events });
 }
 function isDeleteDay(reaction, user, added, { config, log }) {
 	if (!added) { return }
@@ -179,18 +191,25 @@ function isDeleteDay(reaction, user, added, { config, log }) {
 
 	set({ log });
 
-	sendDelete(`${user}, Your entry for **${date}** day has been removed`, reaction.message);
+	msg.channel.send(`${user}, Your entry for **${date}** day has been removed`).then(reactOk);
+}
+function deleteMessage(reaction, user, added) {
+	if (!added) { return }
+	if (reaction.message.author != client.user) { return };
+
+	reaction.message.delete();
 }
 
 function messageReaction(reaction, user, added) {
 	if (user == client.user) { return }
+	let config = get('config');
 
 	let fn;
 	if (['👍', '👎', '❌'].includes(reaction.emoji.name)) { fn = isRSVP }
 	else if ('🗑' == reaction.emoji.name) { fn = isDeleteDay }
+	else if (config.doneEmoji == reaction.emoji.name) { fn = deleteMessage }
 	else { return }
 
-	let config = get('config');
 	let events = get('events');
 	let log = get('log');
 	try {
@@ -229,13 +248,12 @@ function updateRegister() {
 			})
 	})
 }
-function sendTp2(event) { // poor implementation
-	const config = get('config');
+function sendTp2(event) {
 	Object.keys(event.people)
-		.filter(id => event.people[id] === true)
+		.filter(id => event.people[id].status === true)
 		.forEach(id => {
-			const user = client.guilds.cache.get(Object.keys(config.guilds)[0]).members.cache.get(id); //BAD LINE
-			if (user !== undefined && user.voice.channel) {
+			const user = client.guilds.cache.get(event.guildID).members.cache.get(id);
+			if (user !== undefined && !user.voice.channel) {
 				//user isn't cached OR user isn't connected
 				user.send(`You're late to your meeting called **${event.title}**`);
 			}
@@ -244,20 +262,21 @@ function sendTp2(event) { // poor implementation
 }
 function sendTm0(event) {
 	Object.entries(event.people)
-		.filter((entry) => entry[1] !== false)
-		.forEach(async ([id, status]) =>
-			(await client.users
-				.fetch(id))
-				.send(get('config').reminder[JSON.stringify(status)] + event.title)
-		);
+		.filter(([id, usrData]) => usrData.status !== false)
+		.forEach(async ([id, usrData]) => {
+			const config = get('config');
+
+			const user = await client.users.fetch(id);
+			user.send(`${config.reminder[JSON.stringify(usrData.status)]} titled ${event.title}`);
+		});
 }
 function sendTm15(event) {
 	Object.keys(event.people)
-		.filter(id => event.people[id] == null)
-		.forEach(async id =>
-			(await client.users
-				.fetch(id))
-				.send(`You have not responded to a discord meeting taking place in 15 minutes titled **${event.title}**!`));
+		.filter(id => event.people[id].status == null)
+		.forEach(async id => {
+			const user = await client.users.fetch(id)
+			user.send(`You have not responded to a discord meeting taking place in 15 minutes titled **${event.title}**!`)
+		});
 }
 client.on('ready', () => {
 	const isMinsFromNow = (mins, event) => {
@@ -265,17 +284,23 @@ client.on('ready', () => {
 	}
 
 	console.log(`Logged in as ${client.user.tag}`);
-	client.user.setActivity('Unlimited POWAHH');
+	client.user.setPresence({
+		activity: {
+			name: 'for events',
+			type: 'WATCHING',
+		}
+	})
 
 	setInterval(() => {
 		updateRegister();
 		const events = get('events');
 
 		Object.values(events).forEach(event => {
+
 			if (isMinsFromNow(-2, event) && !event.reminders.tp2) {
 				sendTp2(event);
 				events[event.title].reminders.tp2 = true;
-				delete events[event.title];
+				deleteEvent(event)
 			} else if (isMinsFromNow(0, event) && !event.reminders.tm0) {
 				sendTm0(event);
 				events[event.title].reminders.tm0 = true;
@@ -287,7 +312,6 @@ client.on('ready', () => {
 		});
 	}, 1000);
 });
-client.login(get('config').token.replace(/BRUH/g, ''));
 
 function sendDebug({ msg }) {
 	let file;
@@ -296,7 +320,7 @@ function sendDebug({ msg }) {
 	else if (msg.content.endsWith('log')) { file = 'log' }
 	else { throw 'Valid files are \`events\`, \`config\`, \`log\`' }
 
-	msg.channel.send(`\`${JSON.stringify(get(file), null, 2)}\``)
+	msg.channel.send(`\`${JSON.stringify(get(file), null, 2)}\``).then(reactOk)
 		.catch(err => {
 			if (err.code == 50035) { // message too long
 				fs.writeFileSync('./temp.txt', JSON.stringify(get(file), null, 2));
@@ -307,6 +331,7 @@ function sendDebug({ msg }) {
 		cnf.register[msg.author.id].stats.debugs += 1;
 		return cnf
 	}, 'config');
+	msg.delete();
 }
 
 function help({ msg, config }) {
@@ -319,14 +344,16 @@ function help({ msg, config }) {
 		})
 		.join('\n');
 
-	msg.channel.send(help);
+	msg.channel.send(help).then(reactOk);
+	msg.delete();
 }
 
 function sendPresets({ msg, config }) {
 	const presets = Object.entries(config.presets)
 		.map(([keyWord, time]) => `\t\`${keyWord}\`  :  \`${time}\``)
 		.join('\n');
-	msg.channel.send(`__Presets include:__\n${presets}`);
+	msg.channel.send(`__Presets include:__\n${presets}`).then(reactOk);
+	msg.delete();
 }
 function createEvent({ msg, config, events }) {
 	const getTitle = () => {
@@ -352,7 +379,6 @@ function createEvent({ msg, config, events }) {
 				.filter(word => Object.keys(config.presets).includes(word))[0];
 			input = config.presets[input];
 			if (input === undefined) {
-				// sendDelete()
 				today.setHours(today.getHours() + 1);
 				today.setMinutes(0, 0, 0);
 				return today;
@@ -392,8 +418,15 @@ function createEvent({ msg, config, events }) {
 				config.register[b].username.toUpperCase() ?
 				-1 : 1;
 		});
-		// each user is defaulted to null status
-		return mentions.reduce((acc, usr) => { acc[usr] = null; return acc; }, {});
+
+		const peopleObj = mentions.reduce((acc, usr) => {
+			acc[usr] = {
+				status: null,
+				hasConnected: false,
+			};
+			return acc;
+		}, {});
+		return peopleObj;
 	}
 	const getEmoji = (date) => {
 		let time = date.getHours();
@@ -432,6 +465,8 @@ function createEvent({ msg, config, events }) {
 	event.emoji = getEmoji(event.date);
 	event.creator = msg.author.id;
 	event.people = getPeople();
+	event.guildID = msg.guild.id;
+	event.channelID = msg.channel.id;
 	event.messages = {
 		creation: msg.id,
 		readback: null,
@@ -456,21 +491,22 @@ function clear({ msg, events }) {
 	if (parts[2] !== undefined) {//clear event title
 		const requestedTitle = parts.slice(2, parts.length).join(' ');
 		if (Object.keys(events).includes(requestedTitle)) {
-			delete events[requestedTitle]
-			sendDelete(`Event titled **${requestedTitle}** has been deleted`, msg)
+			deleteEvent(events[requestedTitle]);
+			msg.channel.send(`Event titled **${requestedTitle}** has been deleted`, msg).then(reactOk);
 		} else { throw `No event titled **${requestedTitle}**` }
 	} else {//clear
-		events = {};
-		sendDelete(`All events cleared`, msg);
+		Object.values(events).forEach(deleteEvent);
+		msg.channel.send(`All events cleared`).then(reactOk);
 	}
-	set({ events });
+	msg.delete();
 }
 function time({ msg, config }) {
 	if (msg.content == 'event timetoggle') {
 		config.dateOps[1].hour12 = !(config.dateOps[1].hour12);
 		set({ config });
 	}
-	sendDelete(`**${config.dateOps[1].hour12 ? '12' : '24'}** Hour time is now active`, msg);
+	msg.channel.send(`**${config.dateOps[1].hour12 ? '12' : '24'}** Hour time is now active`).then(reactOk);
+	msg.delete();
 }
 
 function future({ msg, config, events }) {
@@ -485,11 +521,12 @@ function future({ msg, config, events }) {
 			const date = new Date(event.date);
 			const dateString = date.toLocaleTimeString(...config.dateOps);
 			const people = Object.entries(event.people)
-				.map(([id, status]) => `\t\t\t**${config.register[id].username.split(' ')[0]}** ${config.statuses[JSON.stringify(status)]}`)
+				.map(([id, usrData]) => `\t\t\t**${config.register[id].username.split(' ')[0]}** ${config.statuses[JSON.stringify(usrData.status)]}`)
 				.join('\n');
 			return `👉  **${event.title}** is happening at **${dateString}**, attendance:\n${people}`;
 		}).join('\n\n');
-	msg.channel.send(`__Upcoming events:__\n${calender}`);
+	msg.channel.send(`__Upcoming events:__\n${calender}`).then(reactOk);
+	msg.delete();
 }
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -548,7 +585,8 @@ function sendSleepStats({ msg, log, config }) {
 		.map(id => `**${config.register[id].username}**:\n\t\tDays won: ${config.register[id].daysWon}\n\t\tTotal percent: ${config.register[id].totalPercent}%\n\t\tAverage percent: ${Math.round(config.register[id].averagePercent)}%`)
 		.join('\n');
 
-	msg.channel.send(`__Stats are looking like this:__\n${stats}`);
+	msg.channel.send(`__Stats are looking like this:__\n${stats}`).then(reactOk);
+	msg.delete();
 }
 
 function logSleep({ msg, log, config }) {
@@ -634,17 +672,19 @@ function define({ msg, config }) {
 	const word = msg.content.replace(/define /, '');
 	axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${key}`)
 		.then(res => {
-			try {
-				//take the first definition and format it
-				const log = res.data[0].shortdef
-					.map(p => `\`\`\`${p};\`\`\``)
-					.join('\n');
-				msg.channel.send(`__${word}__:\n${log}`);
-			} catch (e) { throw `Yea... that word dosn't exist` }
-		})
+			//take the first definition and format it
+			const log = res.data[0].shortdef
+				.map(p => `\`\`\`${p};\`\`\``)
+				.join('\n');
+			msg.channel.send(`__${word}__:\n${log}`).then(reactOk);
+		}).catch(err => { throw `Yea... that word dosn't exist` })
 	updateStat(cnf => {
 		cnf.register[msg.author.id].stats.definitions += 1;
 		return cnf;
 	}, 'config');
-
+	msg.delete();
 }
+
+
+
+client.login(get('config').token.replace(/BRUH/g, ''));

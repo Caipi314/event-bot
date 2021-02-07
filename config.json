@@ -62,14 +62,19 @@
     }
   },
   "reminder": {
-    "true": "You have a discord meeting now titled ",
-    "null": "You have not responded to a discord meeting taking place now titled "
+    "true": "You have a discord meeting now ",
+    "null": "You have not responded to a discord meeting taking place now "
   },
   "statuses": {
     "true": "is coming",
     "false": "is not coming",
     "null": "is too busy to respond"
   },
+  "emojiIdx": {
+    "👍": true,
+    "👎": false
+  },
+  "doneEmoji": "👌",
   "dateOps": [
     "en-US",
     {
@@ -125,10 +130,10 @@
       },
       "stats": {
         "debugs": 1,
-        "definitions": 0,
+        "definitions": 5,
         "noUs": 5,
-        "eventsCreated": 91,
-        "eventsAttended": 49
+        "eventsCreated": 124,
+        "eventsAttended": 64
       }
     },
     "758748636108029952": {

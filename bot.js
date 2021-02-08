@@ -104,7 +104,7 @@ function checkForOthers({ msg, config, events }) {
 		isKeyword();
 	} else if (config.noYouSpellings.some(word => msg.content.includes(word))) {
 		isNoU();
-	} else if (msg.content.toLowerCase().endsWith(' right?')) {
+	} else if (msg.content.toLowerCase().endsWith('?')) {
 		isPoll();
 	} else if (msg.channel.id == Object.values(config.guilds)[0].rateChannel) {
 		isRate();

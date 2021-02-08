@@ -168,7 +168,10 @@ function isRSVP(reaction, user, added, { config, events }) {
 		events[event.title] = event;
 		set({ events });
 	} else { //must be ❌
-		if (event.creator != user.id) { throw (added ? `${user}, You cannot delete someone else's event!` : `${user} the damage was already done bud`) }
+		if (event.creator != user.id) {
+			if (!added){ throw `${user} the damage was already done bud`};
+			else{ return msg.channel.send(`<!${event.creator}>, <!${user}> wants to delete your event called **${event.title}**`)};
+		}
 
 		deleteEvent(event);
 	}

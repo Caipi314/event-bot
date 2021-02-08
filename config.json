@@ -30,7 +30,9 @@
     "lunch": "1:15",
     "afterschool": "4:32",
     "postdinner": "8:00",
-    "bed": "11:00"
+    "bed": "11:00",
+    "tomorrow": "",
+    "tmr": ""
   },
   "noYouSpellings": [
     "no u",
@@ -132,7 +134,7 @@
         "debugs": 1,
         "definitions": 5,
         "noUs": 5,
-        "eventsCreated": 124,
+        "eventsCreated": 137,
         "eventsAttended": 64
       }
     },
@@ -169,6 +171,12 @@
       "id": "769014043444641842",
       "username": "No U",
       "discriminator": "5477",
+      "bot": true
+    },
+    "401328409499664394": {
+      "id": "401328409499664394",
+      "username": "Alpha",
+      "discriminator": "9179",
       "bot": true
     }
   }

@@ -50,9 +50,9 @@ client.on('message', msg => {
 	else if (msg.content.startsWith('event future')) { fn = future }
 	else if (msg.content.startsWith('event presets')) { fn = sendPresets }
 	//event kewords have to be last
-	else if (msg.content.startsWith('event ')) { fn = createEvent }
-	else if (msg.content.startsWith('meeting ')) { fn = createEvent }
-	else if (msg.content.startsWith('call ')) { fn = createEvent }
+	else if (msg.content.toLowerCase().startsWith('event ')) { fn = createEvent }
+	else if (msg.content.toLowerCase().startsWith('meeting ')) { fn = createEvent }
+	else if (msg.content.toLowerCase().startsWith('call ')) { fn = createEvent }
 	//sleep bot
 	else if (msg.content.startsWith('sleep history')) { fn = sendHistory }
 	else if (msg.content.startsWith('sleep stats')) { fn = sendSleepStats }
@@ -169,10 +169,10 @@ function isRSVP(reaction, user, added, { config, events }) {
 		set({ events });
 	} else { //must be ❌
 		if (event.creator != user.id) {
-			if (!added){ throw `${user} the damage was already done bud` };
+			if (!added) { throw `${user} the damage was already done bud` }
 			else {
 				reaction.message.channel.send(`<!${event.creator}>, ${user} wants to delete your event called **${event.title}**`);
-				return;
+				return
 			}
 		}
 
@@ -285,9 +285,9 @@ function sendTm15(event) {
 		});
 }
 client.on('ready', () => {
-	const isMinsFromNow = (mins, event) => {
-		return new Date >= new Date(event.date) - (60 * 1000 * mins)
-	}
+	const isMinsFromNow = (mins, event) =>
+		new Date >= new Date(event.date) - (60 * 1000 * mins)
+
 
 	console.log(`Logged in as ${client.user.tag}`);
 	client.user.setPresence({
@@ -296,6 +296,10 @@ client.on('ready', () => {
 			type: 'WATCHING',
 		}
 	})
+	updateStat(cnf => {
+		cnf.hosted = process.env._ && process.env._.indexOf("heroku");
+		return cnf;
+	}, 'config');
 
 	setInterval(() => {
 		updateRegister();
@@ -306,7 +310,7 @@ client.on('ready', () => {
 			if (isMinsFromNow(-2, event) && !event.reminders.tp2) {
 				sendTp2(event);
 				events[event.title].reminders.tp2 = true;
-				deleteEvent(event)
+				deleteEvent(event);
 			} else if (isMinsFromNow(0, event) && !event.reminders.tm0) {
 				sendTm0(event);
 				events[event.title].reminders.tm0 = true;
@@ -374,43 +378,57 @@ function createEvent({ msg, config, events }) {
 		return title;
 	}
 	const getDate = () => {
-		const offset = (process.env._ && process.env._.indexOf("heroku") ? 5 : 0) + (config.dateOps[1].hour12 ? 12 : 0);
-		const today = new Date();
-		let input;
-		if (msg.content.includes(':')) {
-			input = msg.content.split(' ').filter(x => x.match(/:/g))[0];
-		} else {
-			input = msg.content
-				.split(' ')
-				.filter(word => Object.keys(config.presets).includes(word))[0];
-			input = config.presets[input];
-			if (input === undefined) {
-				today.setHours(today.getHours() + 1);
-				today.setMinutes(0, 0, 0);
-				return today;
+		const msgToInput = () => {
+			const parts = msg.content.split(' ');
+			if (msg.content.includes(':')) {//
+				const input = parts.filter(x => x.match(/:/g))[0];
+				const tmr = ['tmr', 'tommorow'].filter(spelling => input.includes(spelling))[0];
+				if (tmr === undefined) { return input }//no tommorow arg
+
+				const time = input.replace(tmr, '').replace('-', '');
+				const month = now.toLocaleString('default', { month: 'short' });
+				return `${month}-${now.getDate() + 1}-${time}`;
+
+			} else {
+				const presetWord = parts.filter(word =>
+					Object.keys(config.presets).includes(word.toLowerCase()))[0];
+				const presetTime = config.presets[presetWord];
+				if (presetTime === undefined) {
+					return `${now.getHours() + 1 + offset}:00`;
+				}
+				return presetTime;
 			}
 		}
-
-
-		if (input.split('-').length == 3) { // its in this format
-			input = `${today.getFullYear()}-${input}`;
-			const dateObj = new Date(input);
-			dateObj.setTime(dateObj.getTime() + (offset * 60 * 60 * 1000));
-			return dateObj;
-		} else {
-			const hours = parseInt(input.split(':')[0]) + offset;
-			const minutes = parseInt(input.split(':')[1]);
-			const date = new Date(
-				today.getFullYear(),
-				today.getMonth(),
-				today.getDate(),
-				hours,
-				minutes
-			);
+		const inputToDateObj = (input) => {
+			let date;
+			//from "3:45" or "jan-1-12:30" to new Date()
+			if (input.split('-').length == 3) {
+				input = `${now.getFullYear()}-${input}`; // add the year to the front
+				date = new Date(input);
+				date.setTime(date.getTime() + (offset * 60 * 60 * 1000));
+			} else {
+				const hours = parseInt(input.split(':')[0]) + offset;
+				const minutes = parseInt(input.split(':')[1]);
+				date = new Date(
+					now.getFullYear(),
+					now.getMonth(),
+					now.getDate(),
+					hours,
+					minutes
+				);
+			}
 			if (isNaN(date.getTime())) { throw 'Invalid time' }
-			else if (today > date) { throw 'Date is in the past' }
+			if (now > date) { throw 'Date is in the past' }
+			// const sameday = now.getDate() == date.getDate();
+			// console.log({ sameday })
+			// console.log(date.getDate() - 5)
 			return date;
 		}
+		const offset = config.hosted ? 5 : 0 + (config.dateOps[1].hour12 ? 12 : 0);
+		const now = new Date();
+
+		const input = msgToInput();
+		return inputToDateObj(input);
 	}
 	const getPeople = () => {
 		let mentions = msg.mentions.users.map(user => user.id);
@@ -435,10 +453,10 @@ function createEvent({ msg, config, events }) {
 		return peopleObj;
 	}
 	const getEmoji = (date) => {
-		let time = date.getHours();
+		let time = date.getHours() + (config.hosted ? 5 : 0);
 		if (time > 12) { time -= 12 }
 		if (date.getMinutes() > 15 && date.getMinutes() < 45) { time += '30'; }
-		if (date.getMinutes() > 45) { time += 1; }
+		else if (date.getMinutes() > 45) { time += 1; }
 		return `:clock${time}:`
 	}
 	const sendConfimation = (event) => {
@@ -468,6 +486,7 @@ function createEvent({ msg, config, events }) {
 	const event = {};
 	event.title = getTitle();
 	event.date = getDate();
+	// event.dateString = getDateString();
 	event.emoji = getEmoji(event.date);
 	event.creator = msg.author.id;
 	event.people = getPeople();

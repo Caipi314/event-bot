@@ -6,6 +6,7 @@
       "rateChannel": "804492018868813856"
     }
   },
+  "timeOffset": 300,
   "help": {
     "eventBot": {
       "event clear <[title]>": "clears one or all events",
@@ -111,8 +112,8 @@
         "debugs": 0,
         "definitions": 0,
         "noUs": 2,
-        "eventsCreated": 1,
-        "eventsAttended": 6
+        "eventsCreated": 2,
+        "eventsAttended": 7
       }
     },
     "308735619616735234": {
@@ -134,7 +135,7 @@
         "debugs": 1,
         "definitions": 5,
         "noUs": 5,
-        "eventsCreated": 140,
+        "eventsCreated": 153,
         "eventsAttended": 64
       }
     },
@@ -158,7 +159,7 @@
         "definitions": 2,
         "noUs": 0,
         "eventsCreated": 8,
-        "eventsAttended": 24
+        "eventsAttended": 25
       }
     },
     "235088799074484224": {

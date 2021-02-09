@@ -171,7 +171,7 @@ function isRSVP(reaction, user, added, { config, events }) {
 		if (event.creator != user.id) {
 			if (!added) { throw `${user} the damage was already done bud` }
 			else {
-				reaction.message.channel.send(`<!${event.creator}>, ${user} wants to delete your event called **${event.title}**`);
+				reaction.message.channel.send(`<@${event.creator}>, ${user} wants to delete your event called **${event.title}**`);
 				return
 			}
 		}
@@ -297,7 +297,7 @@ client.on('ready', () => {
 		}
 	})
 	updateStat(cnf => {
-		cnf.hosted = process.env._ && process.env._.indexOf("heroku");
+		cnf.timeOffset = new Date().getTimezoneOffset();
 		return cnf;
 	}, 'config');
 	// console.log(process.env._.indexOf("heroku"))
@@ -401,32 +401,28 @@ function createEvent({ msg, config, events }) {
 			}
 		}
 		const inputToDateObj = (input) => {
-			let date;
-			//from "3:45" or "jan-1-12:30" to new Date()
-			if (input.split('-').length == 3) {
-				input = `${now.getFullYear()}-${input}`; // add the year to the front
-				date = new Date(input);
-				date.setTime(date.getTime() + (offset * 60 * 60 * 1000));
-			} else {
-				const hours = parseInt(input.split(':')[0]) + offset;
-				const minutes = parseInt(input.split(':')[1]);
-				date = new Date(
-					now.getFullYear(),
-					now.getMonth(),
-					now.getDate(),
-					hours,
-					minutes
-				);
+			const toFullString = (txt) => {
+				if (txt.split('-').length == 3) {// "jan-1-12:30"
+					return `${now.getFullYear()}-${txt}`; // add the year to the front
+				} else if (txt.split('-').length == 1) {// "12:30"
+					const month = now.toLocaleString('default', { month: 'short' });
+					return `${now.getFullYear()}-${month}-${now.getDate()}-${txt}`;
+				}
 			}
+			const date = new Date(toFullString(input));
+			date.setTime(date.getTime() + (offset * 60 * 60 * 1000));// + offset
+			console.log(date)
 			if (isNaN(date.getTime())) { throw 'Invalid time' }
 			if (now > date) { throw 'Date is in the past' }
-			// const sameday = now.getDate() == date.getDate();
+			// console.log([date.getDate(), now.getDate()])
+			// const sameday = date.getDate() == now.getDate();
 			// console.log({ sameday })
 			// console.log(date.getDate() - 5)
 			return date;
 		}
-		const offset =/* config.hosted ? 5 : 0 +*/ (config.dateOps[1].hour12 ? 12 : 0);
 		const now = new Date();
+		const diffFromTor = (now.getTimezoneOffset() / 60) - 5;
+		const offset = diffFromTor + (config.dateOps[1].hour12 ? 12 : 0);
 
 		const input = msgToInput();
 		return inputToDateObj(input);
@@ -453,7 +449,7 @@ function createEvent({ msg, config, events }) {
 		}, {});
 		return peopleObj;
 	}
-	const getEmoji = (date) => {
+	const getEmoji = (date) => { //not working under commit "test"
 		let time = date.getHours() + (config.hosted ? 5 : 0);
 		if (time > 12) { time -= 12 }
 		if (date.getMinutes() > 15 && date.getMinutes() < 45) { time += '30'; }

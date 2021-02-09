@@ -300,6 +300,7 @@ client.on('ready', () => {
 		cnf.hosted = process.env._ && process.env._.indexOf("heroku");
 		return cnf;
 	}, 'config');
+	// console.log(process.env._.indexOf("heroku"))
 
 	setInterval(() => {
 		updateRegister();
@@ -424,7 +425,7 @@ function createEvent({ msg, config, events }) {
 			// console.log(date.getDate() - 5)
 			return date;
 		}
-		const offset = config.hosted ? 5 : 0 + (config.dateOps[1].hour12 ? 12 : 0);
+		const offset =/* config.hosted ? 5 : 0 +*/ (config.dateOps[1].hour12 ? 12 : 0);
 		const now = new Date();
 
 		const input = msgToInput();

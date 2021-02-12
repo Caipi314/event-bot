@@ -6,7 +6,7 @@
       "rateChannel": "804492018868813856"
     }
   },
-  "timeOffset": 300,
+  "timeOffset": 0,
   "help": {
     "eventBot": {
       "event clear <[title]>": "clears one or all events",
@@ -27,13 +27,11 @@
     }
   },
   "presets": {
-    "break": "10:30",
-    "lunch": "1:15",
-    "afterschool": "4:32",
-    "postdinner": "8:00",
-    "bed": "11:00",
-    "tomorrow": "",
-    "tmr": ""
+    "break": "10:30am",
+    "lunch": "1:15pm",
+    "afterschool": "4:32pm",
+    "postdinner": "8:00pm",
+    "bed": "11:00pm"
   },
   "noYouSpellings": [
     "no u",
@@ -82,6 +80,7 @@
     "en-US",
     {
       "timeStyle": "short",
+      "dateStyle": "medium",
       "timeZone": "America/New_York",
       "hour12": true
     }
@@ -135,8 +134,8 @@
         "debugs": 1,
         "definitions": 5,
         "noUs": 5,
-        "eventsCreated": 153,
-        "eventsAttended": 64
+        "eventsCreated": 264,
+        "eventsAttended": 66
       }
     },
     "758748636108029952": {
@@ -158,8 +157,8 @@
         "debugs": 0,
         "definitions": 2,
         "noUs": 0,
-        "eventsCreated": 8,
-        "eventsAttended": 25
+        "eventsCreated": 9,
+        "eventsAttended": 26
       }
     },
     "235088799074484224": {
@@ -178,6 +177,12 @@
       "id": "401328409499664394",
       "username": "Alpha",
       "discriminator": "9179",
+      "bot": true
+    },
+    "282859044593598464": {
+      "id": "282859044593598464",
+      "username": "ProBot ✨",
+      "discriminator": "5803",
       "bot": true
     }
   }

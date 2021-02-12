@@ -1,8 +1,9 @@
 {
-  "Untitled Event": {
-    "title": "Untitled Event",
-    "date": "2021-02-09T18:00:00.000Z",
-    "emoji": ":clock1:",
+  "school": {
+    "title": "school",
+    "date": "2021-02-17T01:30:00.000Z",
+    "dateString": "Feb 16, 8:30 PM",
+    "emoji": ":clock830:",
     "creator": "308735619616735234",
     "people": {
       "308735619616735234": {
@@ -13,9 +14,34 @@
     "guildID": "761771802568687616",
     "channelID": "808116966576619551",
     "messages": {
-      "creation": "808723482660700220",
-      "readback": "808723483286044692",
-      "guestList": "808723484447604776"
+      "creation": "809868773133385749",
+      "readback": "809868774151815189",
+      "guestList": "809868774747799603"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "today": {
+    "title": "today",
+    "date": "2021-02-12T20:00:00.000Z",
+    "dateString": "3:00 PM",
+    "emoji": ":clock3:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809869234867273789",
+      "readback": "809869235516866581",
+      "guestList": "809869236704772137"
     },
     "reminders": {
       "tp2": true,
@@ -23,10 +49,11 @@
       "tm15": true
     }
   },
-  "Untitled Event!": {
-    "title": "Untitled Event!",
-    "date": "2021-02-10T05:00:00.000Z",
-    "emoji": ":clock0:",
+  "Untitled Event": {
+    "title": "Untitled Event",
+    "date": "2021-02-13T20:00:00.000Z",
+    "dateString": "Feb 13, 3:00 PM",
+    "emoji": ":clock3:",
     "creator": "308735619616735234",
     "people": {
       "308735619616735234": {
@@ -37,9 +64,59 @@
     "guildID": "761771802568687616",
     "channelID": "808116966576619551",
     "messages": {
-      "creation": "808724058132709407",
-      "readback": "808724059071447071",
-      "guestList": "808724059768619018"
+      "creation": "809869267910000670",
+      "readback": "809869268480163870",
+      "guestList": "809869269319548992"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!": {
+    "title": "Untitled Event!",
+    "date": "2021-02-13T20:30:00.000Z",
+    "dateString": "Feb 13, 3:30 PM",
+    "emoji": ":clock330:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809871688044511233",
+      "readback": "809871688735916062",
+      "guestList": "809871689261383740"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "wow its the future": {
+    "title": "wow its the future",
+    "date": "2030-01-02T05:30:00.000Z",
+    "dateString": "Jan 2, 2030, 12:30 AM",
+    "emoji": ":clock030:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809871926960324609",
+      "readback": "809871928016764949",
+      "guestList": "809871928893636638"
     },
     "reminders": {
       "tp2": false,
@@ -49,8 +126,9 @@
   },
   "Untitled Event!!": {
     "title": "Untitled Event!!",
-    "date": "2021-02-09T18:00:00.000Z",
-    "emoji": ":clock1:",
+    "date": "2021-02-12T20:00:00.000Z",
+    "dateString": "3:00 PM",
+    "emoji": ":clock3:",
     "creator": "308735619616735234",
     "people": {
       "308735619616735234": {
@@ -61,9 +139,9 @@
     "guildID": "761771802568687616",
     "channelID": "808116966576619551",
     "messages": {
-      "creation": "808725954989260821",
-      "readback": "808725956000088124",
-      "guestList": "808725956746281000"
+      "creation": "809873172870463488",
+      "readback": "809873173444689920",
+      "guestList": "809873173524119625"
     },
     "reminders": {
       "tp2": true,
@@ -73,8 +151,9 @@
   },
   "Untitled Event!!!": {
     "title": "Untitled Event!!!",
-    "date": "2021-02-22T06:00:00.000Z",
-    "emoji": ":clock1:",
+    "date": "2021-02-13T05:00:00.000Z",
+    "dateString": "12:00 AM",
+    "emoji": ":clock0:",
     "creator": "308735619616735234",
     "people": {
       "308735619616735234": {
@@ -85,9 +164,9 @@
     "guildID": "761771802568687616",
     "channelID": "808116966576619551",
     "messages": {
-      "creation": "808739715146186825",
-      "readback": "808739715678339132",
-      "guestList": "808739716027514961"
+      "creation": "809873211344945153",
+      "readback": "809873211872378901",
+      "guestList": "809873212602449940"
     },
     "reminders": {
       "tp2": false,
@@ -97,8 +176,9 @@
   },
   "Untitled Event!!!!": {
     "title": "Untitled Event!!!!",
-    "date": "2021-02-09T23:00:00.000Z",
-    "emoji": ":clock6:",
+    "date": "2021-02-12T20:00:00.000Z",
+    "dateString": "3:00 PM",
+    "emoji": ":clock3:",
     "creator": "308735619616735234",
     "people": {
       "308735619616735234": {
@@ -109,259 +189,20 @@
     "guildID": "761771802568687616",
     "channelID": "808116966576619551",
     "messages": {
-      "creation": "808739934777114656",
-      "readback": "808739935632752702",
-      "guestList": "808739938510176316"
+      "creation": "809873522137628762",
+      "readback": "809873522641600572",
+      "guestList": "809873523228147761"
     },
     "reminders": {
-      "tp2": false,
-      "tm0": false,
-      "tm15": false
-    }
-  },
-  "lunch": {
-    "title": "lunch",
-    "date": "2021-02-09T23:15:00.000Z",
-    "emoji": ":clock6:",
-    "creator": "308735619616735234",
-    "people": {
-      "308735619616735234": {
-        "status": null,
-        "hasConnected": false
-      },
-      "570396319982682122": {
-        "status": null,
-        "hasConnected": false
-      },
-      "758748636108029952": {
-        "status": null,
-        "hasConnected": false
-      }
-    },
-    "guildID": "761771802568687616",
-    "channelID": "808116966576619551",
-    "messages": {
-      "creation": "808740208816029696",
-      "readback": "808740209373872128",
-      "guestList": "808740209990303774"
-    },
-    "reminders": {
-      "tp2": false,
-      "tm0": false,
-      "tm15": false
+      "tp2": true,
+      "tm0": true,
+      "tm15": true
     }
   },
   "Untitled Event!!!!!": {
     "title": "Untitled Event!!!!!",
-    "date": "2021-02-09T23:00:00.000Z",
-    "emoji": ":clock6:",
-    "creator": "308735619616735234",
-    "people": {
-      "308735619616735234": {
-        "status": null,
-        "hasConnected": false
-      }
-    },
-    "guildID": "761771802568687616",
-    "channelID": "808116966576619551",
-    "messages": {
-      "creation": "808740458578182145",
-      "readback": "808740459526094919",
-      "guestList": "808740460218548264"
-    },
-    "reminders": {
-      "tp2": false,
-      "tm0": false,
-      "tm15": false
-    }
-  },
-  "Untitled Event!!!!!!": {
-    "title": "Untitled Event!!!!!!",
-    "date": "2021-02-09T18:00:00.000Z",
-    "emoji": ":clock1:",
-    "creator": "308735619616735234",
-    "people": {
-      "308735619616735234": {
-        "status": null,
-        "hasConnected": false
-      }
-    },
-    "guildID": "761771802568687616",
-    "channelID": "808116966576619551",
-    "messages": {
-      "creation": "808740687109554197",
-      "readback": "808740687704752128",
-      "guestList": "808740688283041872"
-    },
-    "reminders": {
-      "tp2": true,
-      "tm0": true,
-      "tm15": true
-    }
-  },
-  "Untitled Event!!!!!!!": {
-    "title": "Untitled Event!!!!!!!",
-    "date": "2021-02-09T18:00:00.000Z",
-    "emoji": ":clock1:",
-    "creator": "308735619616735234",
-    "people": {
-      "308735619616735234": {
-        "status": null,
-        "hasConnected": false
-      }
-    },
-    "guildID": "761771802568687616",
-    "channelID": "808116966576619551",
-    "messages": {
-      "creation": "808741747160645702",
-      "readback": "808741747474956319",
-      "guestList": "808741748243300362"
-    },
-    "reminders": {
-      "tp2": true,
-      "tm0": true,
-      "tm15": true
-    }
-  },
-  "<@!308735619616735234>": {
-    "title": "<@!308735619616735234>",
-    "date": "2021-02-10T04:00:00.000Z",
-    "emoji": ":clock11:",
-    "creator": "308735619616735234",
-    "people": {
-      "308735619616735234": {
-        "status": null,
-        "hasConnected": false
-      }
-    },
-    "guildID": "761771802568687616",
-    "channelID": "808116966576619551",
-    "messages": {
-      "creation": "808741781348679715",
-      "readback": "808741782036545626",
-      "guestList": "808741782224371713"
-    },
-    "reminders": {
-      "tp2": false,
-      "tm0": false,
-      "tm15": false
-    }
-  },
-  "Untitled Event!!!!!!!!": {
-    "title": "Untitled Event!!!!!!!!",
-    "date": "2021-02-11T03:30:00.000Z",
-    "emoji": ":clock1030:",
-    "creator": "308735619616735234",
-    "people": {
-      "308735619616735234": {
-        "status": null,
-        "hasConnected": false
-      }
-    },
-    "guildID": "761771802568687616",
-    "channelID": "808116966576619551",
-    "messages": {
-      "creation": "808742040695209984",
-      "readback": "808742041168773121",
-      "guestList": "808742041512968214"
-    },
-    "reminders": {
-      "tp2": false,
-      "tm0": false,
-      "tm15": false
-    }
-  },
-  "Untitled Event!!!!!!!!!": {
-    "title": "Untitled Event!!!!!!!!!",
-    "date": "2021-02-10T04:00:00.000Z",
-    "emoji": ":clock11:",
-    "creator": "308735619616735234",
-    "people": {
-      "308735619616735234": {
-        "status": null,
-        "hasConnected": false
-      }
-    },
-    "guildID": "761771802568687616",
-    "channelID": "808116966576619551",
-    "messages": {
-      "creation": "808742169761546241",
-      "readback": "808742170457669683",
-      "guestList": "808742171548844062"
-    },
-    "reminders": {
-      "tp2": false,
-      "tm0": false,
-      "tm15": false
-    }
-  },
-  "Untitled Event!!!!!!!!!!": {
-    "title": "Untitled Event!!!!!!!!!!",
-    "date": "2021-02-21T05:00:00.000Z",
-    "emoji": ":clock0:",
-    "creator": "308735619616735234",
-    "people": {
-      "308735619616735234": {
-        "status": null,
-        "hasConnected": false
-      },
-      "570396319982682122": {
-        "status": null,
-        "hasConnected": false
-      },
-      "758748636108029952": {
-        "status": null,
-        "hasConnected": false
-      }
-    },
-    "guildID": "761771802568687616",
-    "channelID": "808116966576619551",
-    "messages": {
-      "creation": "808742244457775174",
-      "readback": "808742245100290158",
-      "guestList": "808742245858803762"
-    },
-    "reminders": {
-      "tp2": false,
-      "tm0": false,
-      "tm15": false
-    }
-  },
-  "Untitled Event!!!!!!!!!!!": {
-    "title": "Untitled Event!!!!!!!!!!!",
-    "date": "2021-02-21T04:00:00.000Z",
-    "emoji": ":clock11:",
-    "creator": "308735619616735234",
-    "people": {
-      "308735619616735234": {
-        "status": null,
-        "hasConnected": false
-      },
-      "570396319982682122": {
-        "status": null,
-        "hasConnected": false
-      },
-      "758748636108029952": {
-        "status": null,
-        "hasConnected": false
-      }
-    },
-    "guildID": "761771802568687616",
-    "channelID": "808116966576619551",
-    "messages": {
-      "creation": "808742416638279680",
-      "readback": "808742417243177021",
-      "guestList": "808742417942708224"
-    },
-    "reminders": {
-      "tp2": false,
-      "tm0": false,
-      "tm15": false
-    }
-  },
-  "be": {
-    "title": "be",
-    "date": "2021-02-10T17:00:00.000Z",
+    "date": "2021-02-13T05:00:00.000Z",
+    "dateString": "12:00 AM",
     "emoji": ":clock12:",
     "creator": "308735619616735234",
     "people": {
@@ -373,9 +214,9 @@
     "guildID": "761771802568687616",
     "channelID": "808116966576619551",
     "messages": {
-      "creation": "808742723980623892",
-      "readback": "808742724492460033",
-      "guestList": "808742724940988446"
+      "creation": "809873548751274034",
+      "readback": "809873549229424660",
+      "guestList": "809873549794869288"
     },
     "reminders": {
       "tp2": false,
@@ -383,9 +224,210 @@
       "tm15": false
     }
   },
+  "Untitled Event!!!!!!": {
+    "title": "Untitled Event!!!!!!",
+    "date": "2021-02-12T23:59:59.995Z",
+    "dateString": "6:59 PM",
+    "emoji": ":clock7:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809873638181830696",
+      "readback": "809873638655787009",
+      "guestList": "809873639574470747"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!": {
+    "title": "Untitled Event!!!!!!!",
+    "date": "2021-02-12T19:59:59.995Z",
+    "dateString": "2:59 PM",
+    "emoji": ":clock3:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809873679059255396",
+      "readback": "809873679499788298",
+      "guestList": "809873679978594304"
+    },
+    "reminders": {
+      "tp2": true,
+      "tm0": true,
+      "tm15": true
+    }
+  },
+  "Untitled Event!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!",
+    "date": "2021-02-13T00:59:59.995Z",
+    "dateString": "7:59 PM",
+    "emoji": ":clock-4:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809876177946017812",
+      "readback": "809876178126241834",
+      "guestList": "809876178999443476"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!",
+    "date": "2021-02-12T21:00:00.000Z",
+    "dateString": "4:00 PM",
+    "emoji": ":clock4:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809881196955566090",
+      "readback": "809881197798490114",
+      "guestList": "809881199015231528"
+    },
+    "reminders": {
+      "tp2": true,
+      "tm0": true,
+      "tm15": true
+    }
+  },
+  "Untitled Event!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!",
+    "date": "2021-02-12T21:00:00.000Z",
+    "dateString": "4:00 PM",
+    "emoji": ":clock4:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809881994107551785",
+      "readback": "809881994984030209",
+      "guestList": "809881995379343361"
+    },
+    "reminders": {
+      "tp2": true,
+      "tm0": true,
+      "tm15": true
+    }
+  },
+  "Untitled Event!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!",
+    "date": "2021-02-12T21:00:00.000Z",
+    "dateString": "4:00 PM",
+    "emoji": ":clock4:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809882925033979914",
+      "readback": "809882925566263329",
+      "guestList": "809882926295678987"
+    },
+    "reminders": {
+      "tp2": true,
+      "tm0": true,
+      "tm15": true
+    }
+  },
   "Untitled Event!!!!!!!!!!!!": {
     "title": "Untitled Event!!!!!!!!!!!!",
-    "date": "2021-02-21T04:00:00.000Z",
+    "date": "2021-02-12T21:00:00.000Z",
+    "dateString": "4:00 PM",
+    "emoji": ":clock4:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809885728766951464",
+      "readback": "809885729319944253",
+      "guestList": "809885730028388413"
+    },
+    "reminders": {
+      "tp2": true,
+      "tm0": true,
+      "tm15": true
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!",
+    "date": "2021-02-12T23:30:00.000Z",
+    "dateString": "6:30 PM",
+    "emoji": ":clock630:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809885814116712509",
+      "readback": "809885814153805835",
+      "guestList": "809885815009443870"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "<@!308735619616735234>": {
+    "title": "<@!308735619616735234>",
+    "date": "2021-02-13T04:00:00.000Z",
+    "dateString": "11:00 PM",
     "emoji": ":clock11:",
     "creator": "308735619616735234",
     "people": {
@@ -397,9 +439,600 @@
     "guildID": "761771802568687616",
     "channelID": "808116966576619551",
     "messages": {
-      "creation": "808742823653408818",
-      "readback": "808742824161706004",
-      "guestList": "808742824890990643"
+      "creation": "809886140990881862",
+      "readback": "809886141553049670",
+      "guestList": "809886142119936030"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "4pm": {
+    "title": "4pm",
+    "date": "2021-02-13T09:00:00.000Z",
+    "dateString": "Feb 13, 4:00 AM",
+    "emoji": ":clock4:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809886564636819546",
+      "readback": "809886564733419521",
+      "guestList": "809886565614616596"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!",
+    "date": "2021-02-13T09:00:00.000Z",
+    "dateString": "Feb 13, 4:00 AM",
+    "emoji": ":clock4:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809888042043179058",
+      "readback": "809888042554753034",
+      "guestList": "809888042755817513"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!",
+    "date": "2021-02-12T21:00:00.000Z",
+    "dateString": "4:00 PM",
+    "emoji": ":clock4:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809888479474745365",
+      "readback": "809888480062079026",
+      "guestList": "809888480652951593"
+    },
+    "reminders": {
+      "tp2": true,
+      "tm0": true,
+      "tm15": true
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!!",
+    "date": "2021-02-12T21:00:00.000Z",
+    "dateString": "4:00 PM",
+    "emoji": ":clock4:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809889036633243650",
+      "readback": "809889037804109834",
+      "guestList": "809889038520942652"
+    },
+    "reminders": {
+      "tp2": true,
+      "tm0": true,
+      "tm15": true
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!!!",
+    "date": "2021-02-13T01:00:00.000Z",
+    "dateString": "8:00 PM",
+    "emoji": ":clock8:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      },
+      "570396319982682122": {
+        "status": null,
+        "hasConnected": false
+      },
+      "758748636108029952": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809889109593686057",
+      "readback": "809889110818685013",
+      "guestList": "809889111536173076"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!!!!",
+    "date": "2021-02-13T09:00:00.000Z",
+    "dateString": "Feb 13, 4:00 AM",
+    "emoji": ":clock4:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809889530298630165",
+      "readback": "809889530797621268",
+      "guestList": "809889530965524481"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!!!!!",
+    "date": "2021-02-13T09:00:00.000Z",
+    "dateString": "Feb 13, 4:00 AM",
+    "emoji": ":clock4:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809890215941767178",
+      "readback": "809890216520319067",
+      "guestList": "809890217309634600"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!!!!!!",
+    "date": "2021-02-13T09:00:00.000Z",
+    "dateString": "Feb 13, 4:00 AM",
+    "emoji": ":clock4:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809890345328181291",
+      "readback": "809890346091544606",
+      "guestList": "809890346368106537"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!!!!!!!",
+    "date": "2021-02-13T10:00:00.000Z",
+    "dateString": "Feb 13, 5:00 AM",
+    "emoji": ":clock5:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809891990333554719",
+      "readback": "809891990837395477",
+      "guestList": "809891991382130710"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!!!!!!!!",
+    "date": "2021-02-13T10:00:00.000Z",
+    "dateString": "Feb 13, 5:00 AM",
+    "emoji": ":clock5:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809892349698113577",
+      "readback": "809892350595039272",
+      "guestList": "809892351329173514"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!",
+    "date": "2021-02-13T10:00:00.000Z",
+    "dateString": "Feb 13, 5:00 AM",
+    "emoji": ":clock5:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809892412213166110",
+      "readback": "809892412896968704",
+      "guestList": "809892413485219871"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!!",
+    "date": "2021-02-12T22:00:00.000Z",
+    "dateString": "5:00 PM",
+    "emoji": ":clock5:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809893963140956262",
+      "readback": "809893963632476191",
+      "guestList": "809893964416548884"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "<@!308735619616735234>!": {
+    "title": "<@!308735619616735234>!",
+    "date": "2021-02-13T04:00:00.000Z",
+    "dateString": "11:00 PM",
+    "emoji": ":clock11:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809894384635215882",
+      "readback": "809894384937992234",
+      "guestList": "809894385772003378"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!!!",
+    "date": "2021-02-12T23:00:00.000Z",
+    "dateString": "6:00 PM",
+    "emoji": ":clock6:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809894777801408544",
+      "readback": "809894778299875329",
+      "guestList": "809894778916831283"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!!!!",
+    "date": "2021-02-13T13:00:00.000Z",
+    "dateString": "Feb 13, 8:00 AM",
+    "emoji": ":clock8:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809894817299038249",
+      "readback": "809894817463009352",
+      "guestList": "809894818154676224"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "8pm": {
+    "title": "8pm",
+    "date": "2021-02-12T22:00:00.000Z",
+    "dateString": "5:00 PM",
+    "emoji": ":clock5:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809895668477853748",
+      "readback": "809895669363114034",
+      "guestList": "809895670046654484"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+    "date": "2021-02-13T01:00:00.000Z",
+    "dateString": "8:00 PM",
+    "emoji": ":clock8:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809895723859968030",
+      "readback": "809895724040192031",
+      "guestList": "809895724942360636"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+    "date": "2021-02-12T22:00:00.000Z",
+    "dateString": "5:00 PM",
+    "emoji": ":clock5:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809897085070475325",
+      "readback": "809897085200891906",
+      "guestList": "809897086220369960"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+    "date": "2021-02-12T22:00:00.000Z",
+    "dateString": "5:00 PM",
+    "emoji": ":clock5:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809897268714405905",
+      "readback": "809897269117059083",
+      "guestList": "809897269922496563"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "tmr": {
+    "title": "tmr",
+    "date": "2021-02-13T22:00:00.000Z",
+    "dateString": "Feb 13, 5:00 PM",
+    "emoji": ":clock5:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809897281465090079",
+      "readback": "809897282177597510",
+      "guestList": "809897282706997299"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+    "date": "2021-02-12T22:00:00.000Z",
+    "dateString": "5:00 PM",
+    "emoji": ":clock5:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809898409640460289",
+      "readback": "809898410886561842",
+      "guestList": "809898411486478356"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!": {
+    "title": "Untitled Event!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+    "date": "2021-02-12T23:00:00.000Z",
+    "dateString": "6:00 PM",
+    "emoji": ":clock6:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809898578230247455",
+      "readback": "809898578968707102",
+      "guestList": "809898579640451093"
+    },
+    "reminders": {
+      "tp2": false,
+      "tm0": false,
+      "tm15": false
+    }
+  },
+  "school!": {
+    "title": "school!",
+    "date": "2021-02-16T13:30:00.000Z",
+    "dateString": "Feb 16, 8:30 AM",
+    "emoji": ":clock830:",
+    "creator": "308735619616735234",
+    "people": {
+      "308735619616735234": {
+        "status": true,
+        "hasConnected": false
+      },
+      "570396319982682122": {
+        "status": null,
+        "hasConnected": false
+      },
+      "758748636108029952": {
+        "status": null,
+        "hasConnected": false
+      }
+    },
+    "guildID": "761771802568687616",
+    "channelID": "808116966576619551",
+    "messages": {
+      "creation": "809898722568830997",
+      "readback": "809898723378724904",
+      "guestList": "809898723936043069"
     },
     "reminders": {
       "tp2": false,

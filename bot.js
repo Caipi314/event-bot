@@ -29,7 +29,7 @@ function deleteEvent(event) {
 			.channels.cache.get(event.channelID).messages.fetch(msgId)
 			.then(message => message.delete()
 				.catch(err => console.log('Error: in deleting messages')))
-			.catch(err => console.log('Error: Message not found'))
+			.catch(err => console.log('Ehrror: Message not found'))
 	});
 
 	delete events[event.title];
@@ -297,10 +297,11 @@ client.on('ready', () => {
 		}
 	})
 	updateStat(cnf => {
-		cnf.timeOffset = new Date().getTimezoneOffset();
+		cnf.timeOffset = new Date().getTimezoneOffset() / 60 - 5;
 		return cnf;
 	}, 'config');
-	// console.log(process.env._.indexOf("heroku"))
+
+
 
 	setInterval(() => {
 		updateRegister();
@@ -381,51 +382,64 @@ function createEvent({ msg, config, events }) {
 	const getDate = () => {
 		const msgToInput = () => {
 			const parts = msg.content.split(' ');
-			if (msg.content.includes(':')) {//
+			if (msg.content.includes(':')) {
 				const input = parts.filter(x => x.match(/:/g))[0];
-				const tmr = ['tmr', 'tommorow'].filter(spelling => input.includes(spelling))[0];
-				if (tmr === undefined) { return input }//no tommorow arg
+				const tmr = ['tmr', 'tommorow'].filter(spl => input.includes(spl))[0];
+				if (tmr === undefined) { return input }//if no tommorow arg
 
 				const time = input.replace(tmr, '').replace('-', '');
-				const month = now.toLocaleString('default', { month: 'short' });
-				return `${month}-${now.getDate() + 1}-${time}`;
+				return `${now.getDate() + 1}-${time}`;
 
 			} else {
 				const presetWord = parts.filter(word =>
 					Object.keys(config.presets).includes(word.toLowerCase()))[0];
 				const presetTime = config.presets[presetWord];
-				if (presetTime === undefined) {
-					return `${now.getHours() + 1 + offset}:00`;
-				}
-				return presetTime;
+				if (presetTime !== undefined) { return presetTime }//it is a preset
+
+				// next hour
+				return `${now.getHours() + config.timeOffset + 1}:00am`;
 			}
 		}
-		const inputToDateObj = (input) => {
-			const toFullString = (txt) => {
-				if (txt.split('-').length == 3) {// "jan-1-12:30"
-					return `${now.getFullYear()}-${txt}`; // add the year to the front
-				} else if (txt.split('-').length == 1) {// "12:30"
-					const month = now.toLocaleString('default', { month: 'short' });
-					return `${now.getFullYear()}-${month}-${now.getDate()}-${txt}`;
-				}
-			}
-			const date = new Date(toFullString(input));
-			date.setTime(date.getTime() + (offset * 60 * 60 * 1000));// + offset
-			console.log(date)
-			if (isNaN(date.getTime())) { throw 'Invalid time' }
-			if (now > date) { throw 'Date is in the past' }
-			// console.log([date.getDate(), now.getDate()])
-			// const sameday = date.getDate() == now.getDate();
-			// console.log({ sameday })
-			// console.log(date.getDate() - 5)
+		const toFullString = (txt) => {
+			if (!isNaN(new Date(txt).getTime())) { return new Date(txt).toString() }
+			txt = txt.replace(/(am)|(pm)/g, '');
+			const levels = [
+				now.getDate(),
+				now.toLocaleString('default', { month: 'short' }),
+				now.getFullYear(),
+			];
+			return `${levels.slice(txt.split('-').length - 1).join('-')}-${txt}`;
+		}
+		const inputToDateObj = (fullString, input) => {
+			const isPm = !input.toLowerCase().includes('am');
+			const offset = (isPm ? 12 : 0) - config.timeOffset;
+
+			const date = new Date(fullString);
+			date.setTime(date.getTime() + offset * 60 * 60 * 1000);
 			return date;
 		}
 		const now = new Date();
-		const diffFromTor = (now.getTimezoneOffset() / 60) - 5;
-		const offset = diffFromTor + (config.dateOps[1].hour12 ? 12 : 0);
-
 		const input = msgToInput();
-		return inputToDateObj(input);
+		const fullString = toFullString(input);
+		const date = inputToDateObj(fullString, input);
+		if (isNaN(date.getTime())) { throw `${input} is an Invalid time` }
+		if (now > date) { throw `${date.toLocaleString(...config.dateOps)} is in the past` }
+		return date;
+	}
+	const getDateString = (dateObj) => {
+		const now = new Date();
+		const minsSoFar = (now.getHours() + config.timeOffset) * 60 + now.getMinutes();
+		const minsToMid = 24 * 60 - minsSoFar;
+		const isToday = now.getTime() + minsToMid * 60 * 1000 > dateObj.getTime();
+
+		const options = [
+			'en-CA', {
+				timeZone: 'America/New_York',
+				timeStyle: 'short',
+				dateStyle: !isToday ? 'medium' : undefined,
+			}];
+		return dateObj.toLocaleString(...options).replace(`${now.getFullYear()}, `, '')
+
 	}
 	const getPeople = () => {
 		let mentions = msg.mentions.users.map(user => user.id);
@@ -449,20 +463,20 @@ function createEvent({ msg, config, events }) {
 		}, {});
 		return peopleObj;
 	}
-	const getEmoji = (date) => { //not working under commit "test"
-		let time = date.getHours() + (config.hosted ? 5 : 0);
+	const getEmoji = (date) => {
+		let time = date.getHours() + config.timeOffset;
 		if (time > 12) { time -= 12 }
+		else if (time == 0) { time = 12 }
 		if (date.getMinutes() > 15 && date.getMinutes() < 45) { time += '30'; }
 		else if (date.getMinutes() > 45) { time += 1; }
 		return `:clock${time}:`
 	}
 	const sendConfimation = (event) => {
-		const displayDate = event.date.toLocaleTimeString(...config.dateOps);
 		const isOrAre = Object.keys(event.people).length == 1 ? 'is' : 'are';
 		const displayNames = Object.keys(event.people)
 			.map(x => `<@${x}>`)
 			.join(', ');
-		const data = `**${event.title}** created for **${displayDate}**\n${displayNames} ${isOrAre} invited\nRespond to this message to mark your availability`;
+		const data = `**${event.title}** created for **${event.dateString}**\n${displayNames} ${isOrAre} invited\nRespond to this message to mark your availability`;
 		msg.channel.send(data)
 			.then(message => {
 				['👍', '👎', '❌'].forEach(emoji => message.react(emoji));
@@ -483,7 +497,7 @@ function createEvent({ msg, config, events }) {
 	const event = {};
 	event.title = getTitle();
 	event.date = getDate();
-	// event.dateString = getDateString();
+	event.dateString = getDateString(event.date);
 	event.emoji = getEmoji(event.date);
 	event.creator = msg.author.id;
 	event.people = getPeople();
@@ -540,12 +554,10 @@ function future({ msg, config, events }) {
 		.sort((aEvent, bEvent) => Date.parse(bEvent.date) - Date.parse(aEvent.date))
 		.reverse()
 		.map(event => {
-			const date = new Date(event.date);
-			const dateString = date.toLocaleTimeString(...config.dateOps);
 			const people = Object.entries(event.people)
 				.map(([id, usrData]) => `\t\t\t**${config.register[id].username.split(' ')[0]}** ${config.statuses[JSON.stringify(usrData.status)]}`)
 				.join('\n');
-			return `👉  **${event.title}** is happening at **${dateString}**, attendance:\n${people}`;
+			return `👉  **${event.title}** is happening at **${event.dateString}**, attendance:\n${people}`;
 		}).join('\n\n');
 	msg.channel.send(`__Upcoming events:__\n${calender}`).then(reactOk);
 	msg.delete();
